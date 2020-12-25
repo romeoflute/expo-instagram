@@ -1,0 +1,44 @@
+{
+    "posts": [
+      { 
+        "id": "1", 
+        "likes": 2,
+        "picture": "https://reactnative.dev/docs/assets/p_cat2.png",
+        "caption": "How to keep a frightened cat?", 
+        "username": "meoflute",
+        "userPicture": "https://reactnative.dev/docs/assets/p_cat2.png",
+        "comments":[
+            {
+                "picture": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.theconversation.com%2Ffiles%2F350865%2Foriginal%2Ffile-20200803-24-50u91u.jpg%3Fixlib%3Drb-1.1.0%26q%3D45%26auto%3Dformat%26w%3D1200%26h%3D675.0%26fit%3Dcrop&imgrefurl=https%3A%2F%2Ftheconversation.com%2Fhow-we-found-coronavirus-in-a-cat-143697&tbnid=73OFL6686yQuxM&vet=12ahUKEwi7gqmxwObtAhUHY5QKHZf3BvcQMygGegUIARCMAQ..i&docid=FMbP8714cFMXHM&w=1200&h=675&q=cats%20images&client=safari&ved=2ahUKEwi7gqmxwObtAhUHY5QKHZf3BvcQMygGegUIARCMAQ",
+                "comment": "No comment",
+                "username": "meaow"
+            },
+            {
+                "picture": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.guim.co.uk%2Fimg%2Fmedia%2F7a633730f5f90db3c12f6efc954a2d5b475c3d4a%2F0_138_5544_3327%2Fmaster%2F5544.jpg%3Fwidth%3D1200%26height%3D1200%26quality%3D85%26auto%3Dformat%26fit%3Dcrop%26s%3D27c09d27ccbd139fd0f7d1cef8f7d41d&imgrefurl=https%3A%2F%2Fwww.theguardian.com%2Fworld%2F2020%2Fapr%2F01%2Fcats-can-infect-each-other-with-coronavirus-chinese-study-finds&tbnid=VjJ_VTF5PcEk3M&vet=12ahUKEwi7gqmxwObtAhUHY5QKHZf3BvcQMygFegUIARCKAQ..i&docid=xKMisxjcUmitpM&w=1200&h=1200&q=cats%20images&client=safari&ved=2ahUKEwi7gqmxwObtAhUHY5QKHZf3BvcQMygFegUIARCKAQ",
+                "comment": "Long comment",
+                "username": "meaow"
+            }
+        ]
+      },
+      { 
+        "id": "2", 
+        "likes": 2,
+        "picture": "https://reactnative.dev/docs/assets/p_cat2.png",
+        "caption": "Brood of cats", 
+        "username": "meoflute",
+        "userPicture": "https://reactnative.dev/docs/assets/p_cat2.png",
+        "comments":[
+            {
+                "picture": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.theconversation.com%2Ffiles%2F350865%2Foriginal%2Ffile-20200803-24-50u91u.jpg%3Fixlib%3Drb-1.1.0%26q%3D45%26auto%3Dformat%26w%3D1200%26h%3D675.0%26fit%3Dcrop&imgrefurl=https%3A%2F%2Ftheconversation.com%2Fhow-we-found-coronavirus-in-a-cat-143697&tbnid=73OFL6686yQuxM&vet=12ahUKEwi7gqmxwObtAhUHY5QKHZf3BvcQMygGegUIARCMAQ..i&docid=FMbP8714cFMXHM&w=1200&h=675&q=cats%20images&client=safari&ved=2ahUKEwi7gqmxwObtAhUHY5QKHZf3BvcQMygGegUIARCMAQ",
+                "comment": "Oh, so many comments",
+                "username": "meaow"
+            },
+            {
+                "picture": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fb%2Fb1%2FVAN_CAT.png&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FOdd-eyed_cat&tbnid=yY42gJ5WMC1QdM&vet=12ahUKEwi7gqmxwObtAhUHY5QKHZf3BvcQMygNegUIARCaAQ..i&docid=TAScFkASDkSfRM&w=3840&h=3840&q=cats%20images&client=safari&ved=2ahUKEwi7gqmxwObtAhUHY5QKHZf3BvcQMygNegUIARCaAQ",
+                "comment": "A very long comment",
+                "username": "meaow"
+            }
+        ]
+      }
+    ]
+}
