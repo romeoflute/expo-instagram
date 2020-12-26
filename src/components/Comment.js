@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     profilePic:{
         width: 45, 
         height: 45,
-        borderRadius: "100%",
     },
     text:{
         paddingLeft: 10,
