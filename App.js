@@ -10,7 +10,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LandingStacks from './src/navigation/LandingStacks'
 import Firebase from './config/FirebaseConfig'
 
-
 const Stack = createStackNavigator()
 export default function App() {
 
@@ -28,6 +27,16 @@ export default function App() {
         }
       })
   }, []);
+
+  return (
+    <StoreProvider store={store}>
+      <NavigationContainer>
+        {/* <BottomTab /> */}
+        <LandingStacks />
+      </NavigationContainer>
+    </StoreProvider>
+  );
+  
 
   if (!loaded){
     return(

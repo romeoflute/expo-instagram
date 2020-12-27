@@ -5,7 +5,7 @@ import Header from '../Header'
 import Borderline from '../Borderline'
 import {TEXT_NEED_AN_ACCOUNT, TEXT_SIGN_UP} from '../../utilities/constants'
 
-const Login = () => {
+const Login = ({navigation}) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -20,9 +20,9 @@ const Login = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={{flex:1, justifyContent: 'flex-end', alignItems: 'center'}}>
-                <View style={{paddingBottom: 12}}>
+        <View style={styles.container} >
+            <View style={{flex:1, justifyContent: 'flex-end', alignItems: 'center'}} >
+                <View style={{paddingBottom: 12}} >
                     <Header />
                 </View>
                 <Borderline style/>
@@ -45,12 +45,14 @@ const Login = () => {
                     }}
                     style={styles.input}
                 /> 
-                <View style={{marginTop: 16}}>
+                <View style={{marginTop: 16}} >
                     <TouchableOpacity
                         style={styles.loginScreenButton}
                         onPress={() => onSignIn()}
-                        underlayColor='black'>
+                        underlayColor='black'
+                    >
                         <Text style={styles.loginText}>Sign in</Text>
+                    
                     </TouchableOpacity>
                 </View>
                 <View style={{marginTop: 16}}>
@@ -58,7 +60,11 @@ const Login = () => {
                 </View>
                 <View style={{flexDirection: 'row', marginTop: 16}}>
                     <Text style={{font: 12}} >{TEXT_NEED_AN_ACCOUNT}</Text>
-                    <Text style={{marginLeft: 16, font: 20, fontWeight: 700}} >{TEXT_SIGN_UP}</Text>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Register')}
+                    >
+                        <Text style={{marginLeft: 16, font: 20, fontWeight: 700}} >{TEXT_SIGN_UP}</Text>
+                    </TouchableOpacity>
                 </View>
                 
             </View>

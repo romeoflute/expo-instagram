@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, TextInput, View } from 'react-native'
+import { Button, TextInput, View, StyleSheet } from 'react-native'
 import Firebase from '../../../config/FirebaseConfig'
 
 
@@ -51,6 +51,32 @@ const Register = () => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1, 
+    }, 
+    input:{
+        fontSize: 12,
+        paddingTop: 12,
+        height: 40,
+        borderColor: 'gray', 
+        borderWidth: 1,
+        marginTop: 16,
+    },
+    loginScreenButton:{
+        alignSelf: 'stretch',
+        height: 50,
+        backgroundColor: 'black',
+        justifyContent: 'center'
+    },
+    loginText:{
+        font: 22,
+        fontWeight: 700,
+        color: 'white',
+        textAlign:'center'
+    }
+})
 
 export default Register
 
