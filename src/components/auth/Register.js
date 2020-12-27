@@ -13,7 +13,12 @@ const Register = ({navigation}) => {
 
     const onSignUp = () => {
         Firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
-            console.log("signup result: ", result)
+            console.log("result of signup: ", result)
+            Firebase.firestore().collection("users").doc(Firebase.auth().currentUser.uid)
+            .set({
+                name,
+                email
+            })
         })
         .catch((error) => {
             console.log("signup error: ", error)
