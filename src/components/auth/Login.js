@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, Text, Button, TextInput, View, StyleSheet } from 'react-native'
+import { TouchableOpacity, Text, TextInput, View, StyleSheet } from 'react-native'
 import Firebase from '../../../config/FirebaseConfig'
 import Header from '../Header'
 import Borderline from '../Borderline'
@@ -27,7 +27,7 @@ const Login = ({navigation}) => {
                 </View>
                 <Borderline style/>
             </View>
-            <View style={{flex:1, justifyContent: 'flex-start', alignSelf: 'stretch', paddingLeft: 25, paddingRight: 25, paddingTop: 16}}>
+            <View style={{flex:1, justifyContent: 'flex-start', alignSelf: 'stretch', paddingTop: 16}}>
                 <TextInput 
                     placeholder="email"
                     value={email}
@@ -45,25 +45,22 @@ const Login = ({navigation}) => {
                     }}
                     style={styles.input}
                 /> 
-                <View style={{marginTop: 16}} >
-                    <TouchableOpacity
+                <TouchableOpacity
                         style={styles.loginScreenButton}
                         onPress={() => onSignIn()}
                         underlayColor='black'
                     >
                         <Text style={styles.loginText}>Sign in</Text>
-                    
-                    </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
                 <View style={{marginTop: 16}}>
                     <Borderline style/>
                 </View>
-                <View style={{flexDirection: 'row', marginTop: 16}}>
-                    <Text style={{font: 12}} >{TEXT_NEED_AN_ACCOUNT}</Text>
+                <View style={{flexDirection: 'row', marginTop: 16, marginLeft: 25, marginRight: 25}}>
+                    <Text style={{fontSize: 12}} >{TEXT_NEED_AN_ACCOUNT}</Text>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Register')}
                     >
-                        <Text style={{marginLeft: 16, font: 20, fontWeight: 700}} >{TEXT_SIGN_UP}</Text>
+                        <Text style={{marginLeft: 16, fontSize: 20, fontWeight: 700}} >{TEXT_SIGN_UP}</Text>
                     </TouchableOpacity>
                 </View>
                 
@@ -83,20 +80,27 @@ const styles = StyleSheet.create({
     },
     input:{
         fontSize: 12,
-        paddingTop: 12,
         height: 40,
         borderColor: 'gray', 
         borderWidth: 1,
         marginTop: 16,
+        paddingLeft: 8,
+        marginLeft: 25, 
+        marginRight: 25, 
+        borderRadius: 4
     },
     loginScreenButton:{
         alignSelf: 'stretch',
         height: 50,
         backgroundColor: 'black',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 16,
+        marginLeft: 25, 
+        marginRight: 25, 
+        borderRadius: 4
     },
     loginText:{
-        font: 22,
+        fontSize: 22,
         fontWeight: 700,
         color: 'white',
         textAlign:'center'

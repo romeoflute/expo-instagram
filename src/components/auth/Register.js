@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Button, TextInput, View, StyleSheet } from 'react-native'
+import { Image, Text, TouchableOpacity, TextInput, View, StyleSheet } from 'react-native'
 import Firebase from '../../../config/FirebaseConfig'
+import {TEXT_SIGN_UP, TEXT_SIGNUP_NOTE} from '../../utilities/constants'
+import Borderline from '../Borderline'
+import userplaceholder from '../../../assets/user-placeholder.jpg'; 
 
-
-const Register = () => {
+const Register = ({navigation}) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -20,12 +22,23 @@ const Register = () => {
 
     return (
         <View style={styles.container}>
+            <View style={{marginTop: 24, marginBottom: 120 }}>
+                <TouchableOpacity
+                    onPress={() => console.log("image tapped")}
+                >
+                    <Image 
+                        source={userplaceholder} 
+                        style={styles.userplaceholder}
+                    />
+                </TouchableOpacity>
+            </View>
             <TextInput 
                 placeholder="name"
                 value={name}
                 onChangeText={(newName) => {
                     setName(newName)
                 }}
+                style={styles.input}
             />
             <TextInput 
                 placeholder="email"
@@ -33,6 +46,7 @@ const Register = () => {
                 onChangeText={(newEmail) => {
                     setEmail(newEmail)
                 }}
+                style={styles.input}
             /> 
             <TextInput 
                 placeholder="password"
@@ -41,21 +55,38 @@ const Register = () => {
                 onChangeText={(newPassword) => {
                     setPassword(newPassword)
                 }}
+                style={styles.input}
             /> 
-            <Button
-            title="Sign Up"
-            onPress={() => {
-                onSignUp()
-            }}
-        />
+            <TouchableOpacity
+                style={styles.loginScreenButton}
+                onPress={() => onSignUp()}
+                underlayColor='black'
+            >
+                <Text style={styles.loginText}>{TEXT_SIGN_UP}</Text>
+            </TouchableOpacity>
+
+            <Borderline style/>
+
+            <Text style={{marginTop: 22}}>{TEXT_SIGNUP_NOTE}</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, 
+        flex: 1,
+        justifyContent:'center',
+        alignItems: 'center'
     }, 
+    userplaceholder:{
+        width: 140,
+        height: 140,
+        resizeMode: 'contain', 
+        borderRadius: 150 / 2,
+        overflow: "hidden",
+        borderWidth: 0.5,
+        borderColor: "lightgray"   
+    },
     input:{
         fontSize: 12,
         paddingTop: 12,
@@ -63,15 +94,25 @@ const styles = StyleSheet.create({
         borderColor: 'gray', 
         borderWidth: 1,
         marginTop: 16,
+        alignSelf: 'stretch',
+        marginLeft: 25,
+        marginRight: 25,
+        paddingLeft: 8,
+        borderRadius: 4
     },
     loginScreenButton:{
         alignSelf: 'stretch',
         height: 50,
         backgroundColor: 'black',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 16,
+        marginBottom: 16,
+        marginLeft: 25,
+        marginRight: 25,
+        borderRadius: 4
     },
     loginText:{
-        font: 22,
+        fontSize: 22,
         fontWeight: 700,
         color: 'white',
         textAlign:'center'
