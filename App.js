@@ -6,11 +6,9 @@ import BottomTab from './src/navigation/BottomTab'
 //redux
 import { Provider as StoreProvider } from 'react-redux'
 import store from './src/redux/store'
-import { createStackNavigator } from '@react-navigation/stack';
 import LandingStacks from './src/navigation/LandingStacks'
 import Firebase from './config/FirebaseConfig'
 
-const Stack = createStackNavigator()
 export default function App() {
 
   const [loaded, setLoaded] = useState(false)
@@ -18,6 +16,7 @@ export default function App() {
 
   useEffect(() => {
       Firebase.auth().onAuthStateChanged((authUser)=> {
+        console.log("auth user is: ", authUser.email)
         if(!authUser){
           setLoggedIn(false)
           setLoaded(true)
@@ -27,16 +26,6 @@ export default function App() {
         }
       })
   }, []);
-
-  return (
-    <StoreProvider store={store}>
-      <NavigationContainer>
-        {/* <BottomTab /> */}
-        <LandingStacks />
-      </NavigationContainer>
-    </StoreProvider>
-  );
-  
 
   if (!loaded){
     return(
