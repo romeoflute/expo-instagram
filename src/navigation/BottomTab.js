@@ -21,6 +21,7 @@ const BottomTabs = () => {
             activeColor="#000000"
             inactiveColor="#a9a9a9"
             barStyle={{ backgroundColor: '#d3d3d3' }}
+            labeled={false}
         >
             <BottomTab.Screen 
             name="Feed" 
@@ -43,7 +44,7 @@ const BottomTabs = () => {
                   }}
             />
             <BottomTab.Screen 
-                name="AddScreen" 
+                name="MainAdd" 
                 component={EmptyScreen} 
                 listeners={({ navigation }) => ({
                     tabPress: event => {
