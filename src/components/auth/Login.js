@@ -60,7 +60,11 @@ const Login = ({navigation}) => {
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Register')}
                     >
-                        <Text style={{marginLeft: 16, fontSize: 20, fontWeight: 700}} >{TEXT_SIGN_UP}</Text>
+                        <Text style={{
+                            marginLeft: 16, 
+                            fontSize: 20, 
+                            fontWeight: "700"
+                        }} >{TEXT_SIGN_UP}</Text>
                     </TouchableOpacity>
                 </View>
                 
@@ -101,7 +105,7 @@ const styles = StyleSheet.create({
     },
     loginText:{
         fontSize: 22,
-        fontWeight: 700,
+        fontWeight: "700",
         color: 'white',
         textAlign:'center'
     }

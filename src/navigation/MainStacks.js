@@ -3,9 +3,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 //components
 import Add from '../screens/Add'
 import BottomTab from './BottomTab'
+import Save from '../screens/Save'
 //redux
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchUser} from '../redux/actions/index'
+// import { database } from 'firebase';
 
 const MainStack = createStackNavigator();
 const MainStacks = () => {
@@ -22,7 +24,7 @@ const MainStacks = () => {
       getCurrentUser()
   }, []);
 
-  //get user
+  //get user from Redux
   const user = useSelector(state => state.user)
   console.log("user is: ", user)
 
@@ -36,6 +38,10 @@ const MainStacks = () => {
       <MainStack.Screen
         name="Add"
         component={Add}
+      />
+      <MainStack.Screen
+        name="Save"
+        component={Save}
       />
     </MainStack.Navigator>
   )

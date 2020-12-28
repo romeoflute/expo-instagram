@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     },
     loginText:{
         fontSize: 22,
-        fontWeight: 700,
+        fontWeight: "700",
         color: 'white',
         textAlign:'center'
     }

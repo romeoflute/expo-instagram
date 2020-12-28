@@ -17,7 +17,6 @@ export default function App() {
 
   useEffect(() => {
       Firebase.auth().onAuthStateChanged((authUser)=> {
-        console.log("auth user is: ", authUser.email)
         if(!authUser){
           setLoggedIn(false)
           setLoaded(true)
