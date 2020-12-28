@@ -3,16 +3,18 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import FeedTopTabs from './FeedTopTabs'
 import Explore from '../screens/Explore'
-import Add from '../screens/Add'
 import Notifications from '../screens/Notifications'
 import Profile from '../screens/Profile'
 
 import {MaterialCommunityIcons, MaterialIcons} from 'react-native-vector-icons'
 import { ColorPropType } from 'react-native';
 
-const BottomTabs = () => {
+const BottomTab = createMaterialBottomTabNavigator();
+const EmptyScreen = () => {
+    return (null)
+}
 
-    const BottomTab = createMaterialBottomTabNavigator();
+const BottomTabs = () => {
 
     return (
         <BottomTab.Navigator
@@ -41,8 +43,18 @@ const BottomTabs = () => {
                   }}
             />
             <BottomTab.Screen 
-                name="Add" 
-                component={Add} 
+                name="AddScreen" 
+                component={EmptyScreen} 
+                listeners={({ navigation }) => ({
+                    tabPress: event => {
+                      // Prevent default action
+                      event.preventDefault();
+                      console.log("tab pressed")
+                
+                      // Do something with the `navigation` object
+                      navigation.navigate('Add');
+                    },
+                  })}
                 options={{
                     tabBarLabel: 'Add',
                     tabBarIcon: ({ color }) => (
