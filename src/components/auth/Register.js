@@ -11,13 +11,26 @@ const Register = ({navigation}) => {
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
 
+    const splitStringToArray = (str) => {
+        let trimmedText = str.replace((/  |\r\n|\n|\r|!|"|\t|\s/gm), "");
+
+        let substringArray = []
+        for (let i = 1; i < trimmedText.length + 1; i++) {
+            let substringPrefix = trimmedText.substring(0, i)
+            substringArray.push(substringPrefix)
+        }
+
+        return substringArray
+    }
+
     const onSignUp = () => {
         Firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
             Firebase.firestore().collection("users").doc(Firebase.auth().currentUser.uid)
             .set({
                 uid: Firebase.auth().currentUser.uid,
                 username,
-                email
+                email,
+                keywords: splitStringToArray(username.toLowerCase())
             })
         })
         .catch((error) => {
