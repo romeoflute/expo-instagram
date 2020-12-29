@@ -9,21 +9,16 @@ const Explore = () => {
 
     const fetchUsers = (search) => {
 
-        console.log("now searching: ", search)
-
         Firebase.firestore()
         .collection('users')
-        .where('username', '>=', search)
+        .where('keywords', 'array-contains', search.toLowerCase())
         .get()
         .then((snapshot) => {
             if (snapshot.docs.length > 0){
-                console.log("snapshots.doc for searched users ", snapshot)
                 let users = snapshot.docs.map((doc) => doc.data())
                 setUsers(users)
             }
             else{
-                console.log("there was an error while searching users")
-                console.log("snapshots.doc: ", snapshot)
                 setUsers([])
             }
         })
@@ -40,9 +35,9 @@ const Explore = () => {
                 numColumns={1}
                 horizontal={false}
                 data={users}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.uid}
                 renderItem={({item}) => (
-                    <Text>{item.name}</Text>
+                    <Text>{item.username}</Text>
                 )}
             />
         </View>
