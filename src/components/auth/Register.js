@@ -9,13 +9,14 @@ const Register = ({navigation}) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
+    const [username, setUsername] = useState('')
 
     const onSignUp = () => {
         Firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
             Firebase.firestore().collection("users").doc(Firebase.auth().currentUser.uid)
             .set({
-                name,
+                uid: Firebase.auth().currentUser.uid,
+                username,
                 email
             })
         })
@@ -37,10 +38,10 @@ const Register = ({navigation}) => {
                 </TouchableOpacity>
             </View>
             <TextInput 
-                placeholder="name"
-                value={name}
-                onChangeText={(newName) => {
-                    setName(newName)
+                placeholder="Username"
+                value={username}
+                onChangeText={(newUsername) => {
+                    setUsername(newUsername)
                 }}
                 style={styles.input}
             />

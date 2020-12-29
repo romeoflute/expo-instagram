@@ -1,27 +1,50 @@
-import React, {useEffect} from 'react'
-import {View, Text} from 'react-native'
-import { useSelector, useDispatch } from 'react-redux'
-// import {fetchFeed} from '../redux/actions'
-import Grid from '../components/Grid'
+import React, {useState} from 'react'
+import {View, Text, TextInput, FlatList} from 'react-native'
+import Firebase from '../../config/FirebaseConfig'
+import firebase from 'firebase'
 
 const Explore = () => {
 
-    // const dispatch = useDispatch()
-    // const getFeed = () => dispatch(fetchFeed())
-    // useEffect(() => {
-    //     getFeed()
-    // })
+    const [users, setUsers] = useState([])
 
-    // const feed = useSelector(state => state.feed)
-    // console.log("feed in Explore: ", feed)
-    // if (feed.fetched && feed.data){
-    //     console.log("2. feed in Explore: ", feed)
-    //     return <Grid data = {feed.data} />
-    // }
-    // return null
+    const fetchUsers = (search) => {
+
+        console.log("now searching: ", search)
+
+        Firebase.firestore()
+        .collection('users')
+        .where('username', '>=', search)
+        .get()
+        .then((snapshot) => {
+            if (snapshot.docs.length > 0){
+                console.log("snapshots.doc for searched users ", snapshot)
+                let users = snapshot.docs.map((doc) => doc.data())
+                setUsers(users)
+            }
+            else{
+                console.log("there was an error while searching users")
+                console.log("snapshots.doc: ", snapshot)
+                setUsers([])
+            }
+        })
+    }
     return (
-        <View>
-            <Text>Feed</Text>
+        <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
+            <Text>Hello Discover</Text>
+            <TextInput
+                placeholder="Search users..."
+                onChangeText={(search) => fetchUsers(search)} 
+            />
+
+            <FlatList 
+                numColumns={1}
+                horizontal={false}
+                data={users}
+                keyExtractor={(item) => item.id}
+                renderItem={({item}) => (
+                    <Text>{item.name}</Text>
+                )}
+            />
         </View>
     )
 }

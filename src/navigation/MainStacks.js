@@ -34,6 +34,7 @@ const MainStacks = () => {
       <MainStack.Screen
         name="Bottom"
         component={BottomTab}
+        options={{ title: '' }}
       />
       <MainStack.Screen
         name="Add"
