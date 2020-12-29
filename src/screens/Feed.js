@@ -16,6 +16,8 @@ const Feed = ({navigation}) => {
     const dispatch = useDispatch()
     const getMyPosts = () => dispatch(fetchMyPosts())
 
+    console.log("myPosts ", myPosts)
+
     useEffect(() => {
         if (user){
             getMyPosts()

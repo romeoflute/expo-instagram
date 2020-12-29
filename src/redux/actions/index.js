@@ -28,12 +28,8 @@ export function fetchMyPosts(){
         .get()
         .then((snapshot) => {
             if (snapshot.docs.length > 0){
-                let allMyPosts = []
-                snapshot.docs.forEach(doc => {
-                    // doc is a DocumentSnapshot with actual data
-                    const onePost = doc.data();
-                    allMyPosts.push(onePost)
-                })
+                let allMyPosts = snapshot.docs.map((doc) => doc.data())
+            
                 dispatch({type: USER_POSTS_STATE_CHANGE, myPosts: allMyPosts})
             }
             else{

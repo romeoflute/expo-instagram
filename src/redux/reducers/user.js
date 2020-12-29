@@ -10,7 +10,7 @@ export function user(state = initialState, action) {
         case USER_STATE_CHANGE:
             return {
                 ...state,
-                currentUser: action.currentUser
+                ...action.currentUser
             }
         default:
             return state
