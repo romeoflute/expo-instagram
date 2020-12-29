@@ -133,3 +133,8 @@ docs/pages/versions/*/react-native/*.diff
 /packages/**/*.xcframework
 /packages/**/*.spec.json
 /packages/**/Info-generated.plist
+
+//Firebase
+GoogleService-Info.plist
+Secrets
+Secrets.tar
