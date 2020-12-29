@@ -1,5 +1,5 @@
 import Firebase from '../../../config/FirebaseConfig'
-import {USER_STATE_CHANGE} from '../constants'
+import {USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE} from '../constants'
 
 export function fetchUser(){
     return ((dispatch) => {
@@ -13,6 +13,32 @@ export function fetchUser(){
             }
             else{
                 console.log('error: user does not exist')
+            }
+        })
+    })
+}
+
+export function fetchMyPosts(){
+    return ((dispatch) => {
+        Firebase.firestore()
+        .collection("myPosts")
+        .doc(Firebase.auth().currentUser.uid)
+        .collection("userPosts")
+        .orderBy("date", "asc")
+        .get()
+        .then((snapshot) => {
+            if (snapshot.docs.length > 0){
+                let allMyPosts = []
+                snapshot.docs.forEach(doc => {
+                    // doc is a DocumentSnapshot with actual data
+                    const onePost = doc.data();
+                    allMyPosts.push(onePost)
+                })
+                dispatch({type: USER_POSTS_STATE_CHANGE, myPosts: allMyPosts})
+            }
+            else{
+                dispatch({type: USER_POSTS_STATE_CHANGE, myPosts: []})
+
             }
         })
     })
