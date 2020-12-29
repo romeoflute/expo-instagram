@@ -21,3 +21,9 @@ export const IMAGE_LOGO = "logo"
 export const IMAGE_USER_PLACEHOLDER = "user-placeholder"
 export const IMAGE_PHOTO = "plus.circle"
 
+export const blobFromURL = async (url) => {
+    blob = await fetch(url).then(r => r.blob());
+    return blob
+}
+
+

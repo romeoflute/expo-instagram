@@ -18,10 +18,6 @@ const Profile = ({navigation}) => {
     const dispatch = useDispatch()
     const getMyPosts = () => dispatch(fetchMyPosts())
 
-    console.log("myPosts in Profile ", myPosts)
-    console.log("currentUser in Profile: ", currentUser)
-    console.log("currentUser email in Profile: ", currentUser.email)
-
     useEffect(() => {
         if (currentUser){
             getMyPosts()
@@ -84,8 +80,6 @@ const styles = StyleSheet.create({
         flex: 1/3,
     },
     image:{
-        // flex:1,
-        // aspectRatio: 1/1
         width: width/3,
         height:width/3
     }

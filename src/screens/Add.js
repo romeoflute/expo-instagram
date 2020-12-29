@@ -32,7 +32,6 @@ export default function Add() {
   const takePicture = async () => {
     if (camera){
         const data = await camera.takePictureAsync(null)
-        console.log(data.uri)
         setImage(data.uri)
     }
   }
@@ -45,7 +44,6 @@ export default function Add() {
       quality: 1,
     });
 
-    console.log(result);
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -90,7 +88,7 @@ export default function Add() {
         />
         <Button 
             title="Save" 
-            onPress={() => navigation.navigate("Save", {image})} 
+            onPress={() => navigation.navigate("Save", {uri: image})} 
         />
         <Image source={{uri: image}} style={{flex:1}} />
     </View>
