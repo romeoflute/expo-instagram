@@ -1,8 +1,6 @@
 import { USER_POSTS_STATE_CHANGE} from '../constants/index'
 
-const initialState = {
-    myPosts: []
-}
+const initialState = []
 
 export function myPosts(state = initialState, action) {
 

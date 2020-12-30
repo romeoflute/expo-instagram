@@ -7,7 +7,7 @@ import Notifications from '../screens/Notifications'
 import Profile from '../screens/Profile'
 
 import {MaterialCommunityIcons, MaterialIcons} from 'react-native-vector-icons'
-import { ColorPropType } from 'react-native';
+import Firebase from '../../config/FirebaseConfig';
 
 const BottomTab = createMaterialBottomTabNavigator();
 const EmptyScreen = () => {
@@ -49,10 +49,7 @@ const BottomTabs = () => {
                 listeners={({ navigation }) => ({
                     tabPress: event => {
                       // Prevent default action
-                      event.preventDefault();
-                      console.log("tab pressed")
-                
-                      // Do something with the `navigation` object
+                      event.preventDefault();                
                       navigation.navigate('Add');
                     },
                   })}
@@ -76,6 +73,13 @@ const BottomTabs = () => {
             <BottomTab.Screen 
                 name="Profile" 
                 component={Profile} 
+                listeners={({ navigation }) => ({
+                  tabPress: event => {
+                    event.preventDefault();
+                    console.log("tab pressed with UID: ", Firebase.auth().currentUser.uid )
+                    navigation.navigate('Profile', {userUid: Firebase.auth().currentUser.uid });
+                  },
+                })}
                 options={{
                     tabBarLabel: 'Profile',
                     tabBarIcon: ({ color }) => (

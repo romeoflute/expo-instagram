@@ -1,17 +1,16 @@
 import React, {useState} from 'react'
-import {View, Text, TextInput, FlatList, TouchableOpacity} from 'react-native'
-import Firebase from '../../config/FirebaseConfig'
+import {View, Text, TextInput, FlatList} from 'react-native'
+import Firebase from '../../config'
+import firebase from 'firebase'
 
-
-const Explore = ({navigation}) => {
+const Search = () => {
 
     const [users, setUsers] = useState([])
 
     const fetchUsers = (search) => {
-
         Firebase.firestore()
         .collection('users')
-        .where('keywords', 'array-contains', search.toLowerCase())
+        .where('name', '>=', 'search')
         .get()
         .then((snapshot) => {
             if (snapshot.docs.length > 0){
@@ -24,10 +23,8 @@ const Explore = ({navigation}) => {
         })
     }
     return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-            <Text>Hello Discover</Text>
+        <View>
             <TextInput
-                placeholder="Search users..."
                 onChangeText={(search) => fetchUsers(search)} 
             />
 
@@ -35,15 +32,13 @@ const Explore = ({navigation}) => {
                 numColumns={1}
                 horizontal={false}
                 data={users}
-                keyExtractor={(item) => item.uid}
+                keyExtractor={(item) => item.id}
                 renderItem={({item}) => (
-                    <TouchableOpacity onPress={() => navigation.navigate("Profile", {uid: item.uid})}>
-                        <Text>{item.username}</Text>
-                    </TouchableOpacity>
+                    <Text>{item.name}</Text>
                 )}
             />
         </View>
     )
 }
 
-export default Explore
+export default Search
