@@ -12,6 +12,7 @@ import {width} from '../utilities/constants'
 const Profile = ({route}) => {
    
     const {userUid} = route.params
+    console.log("userUid is now: ", userUid)
 
     const [userPosts, setUserPosts] = useState([])
     const [user, setUser] = useState(null)
@@ -22,20 +23,14 @@ const Profile = ({route}) => {
     const dispatch = useDispatch()
     const getMyPosts = () => dispatch(fetchMyPosts())
 
-    
-
     useEffect(() => {
         if (userUid === Firebase.auth().currentUser.uid){
             console.log("currentUser is: ", currentUser)
             setUser(currentUser)
-            getMyPosts()
-            console.log("user is now: ", user)
-            console.log("getMyPosts called")
         }else{
-            console.log("user is another person")
             Firebase.firestore()
             .collection('users')
-            .doc(Firebase.auth().currentUser.uid)
+            .doc(userUid)
             .get()
             .then((snapshot) => {
                 if (snapshot.exists){
@@ -45,7 +40,14 @@ const Profile = ({route}) => {
                     setUser(null)
                 }
             })
+        }
+    }, [userUid])
 
+    useEffect(() => {
+        if (userUid === Firebase.auth().currentUser.uid){
+            getMyPosts()
+        }else{
+            console.log("get another user's posts")
             Firebase.firestore()
             .collection("myPosts")
             .doc(userUid)
@@ -54,17 +56,16 @@ const Profile = ({route}) => {
             .get()
             .then((snapshot) => {
                 if (snapshot.docs.length > 0){
-                    let allMyPosts = snapshot.docs.map((doc) => doc.data())
-                    console.log("should not be called")
-                    setUserPosts(allMyPosts)
+                    let allPosts = snapshot.docs.map((doc) => doc.data())
+                    console.log("all this other user's posts: ", allPosts)
+                    setUserPosts(allPosts)
                 }
                 else{
-                    console.log("should not be called")
                     setUserPosts([])
                 }
             })
         }
-    }, [userUid])
+    }, [user])
 
     useEffect(() => {
         if (userUid === Firebase.auth().currentUser.uid && myPosts.count > 0){
@@ -73,7 +74,6 @@ const Profile = ({route}) => {
             console.log("userPosts is now: ", userPosts)
         }
     }, [myPosts])
-
 
     const viewComments = (post) => {
         // navigation.navigate("CommentList", {comments: post.comments})
@@ -100,7 +100,7 @@ const Profile = ({route}) => {
                 <FlatList 
                     numColumns={3}
                     horizontal={false}
-                    data={myPosts}
+                    data={userPosts}
                     renderItem={({item}) => {
                         return (
                             <View style={styles.containerImage}>

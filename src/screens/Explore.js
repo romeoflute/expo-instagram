@@ -37,7 +37,7 @@ const Explore = ({navigation}) => {
                 data={users}
                 keyExtractor={(item) => item.uid}
                 renderItem={({item}) => (
-                    <TouchableOpacity onPress={() => navigation.navigate("Profile", {uid: item.uid})}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Profile", {userUid: item.uid})}>
                         <Text>{item.username}</Text>
                     </TouchableOpacity>
                 )}
