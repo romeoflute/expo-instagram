@@ -45,12 +45,13 @@ const Feed = ({navigation}) => {
             </View>
             <View>
                 <FlatList 
-                    numColumns={3}
+                    numColumns={1}
                     horizontal={false}
                     data={timeline}
                     renderItem={({item}) => {
                         return (
                             <View style={styles.containerImage}>
+                                <Text style={styles.username}>{item.username}</Text>
                                 <Image 
                                     style={styles.image}
                                     source={{uri: item.mediaUrl}}
@@ -90,8 +91,11 @@ const styles = StyleSheet.create({
         flex: 1/3,
     },
     image:{
-        width: width/3,
-        height:width/3
+        width: width,
+        height:width
+    },
+    username:{
+
     }
     
 })
