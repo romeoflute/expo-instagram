@@ -7,26 +7,16 @@ import Save from '../screens/Save'
 //redux
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchUser} from '../redux/actions/index'
-// import { database } from 'firebase';
 
 const MainStack = createStackNavigator();
 const MainStacks = () => {
 
-  // const feed = useSelector(state => state.feed)
-  const dispatch = useDispatch()
-
-  //dispatch actions
-  // const getFeed = () => dispatch(fetchFeed())
+  const dispatch = useDispatch() 
   const getCurrentUser = () => dispatch(fetchUser())
 
   useEffect(() => {
-      // getFeed()
       getCurrentUser()
   }, []);
-
-  //get user from Redux
-  const user = useSelector(state => state.user)
-  console.log("user is: ", user)
 
   return(
 

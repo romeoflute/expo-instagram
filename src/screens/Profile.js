@@ -1,31 +1,34 @@
 import React, {useEffect, useState} from 'react'
 // import {fetchFeed} from '../redux/actions'
 import PostList from '../components/PostList'
-import {View, Text, Image, FlatList, StyleSheet} from 'react-native'
+import {View, Text, Image, FlatList, StyleSheet, Button} from 'react-native'
 import Firebase from '../../config/FirebaseConfig'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchMyPosts} from '../redux/actions/index'
+import {fetchMyPosts, fetchUserFollowing} from '../redux/actions/index'
 
 import {width} from '../utilities/constants'
 
 const Profile = ({route}) => {
-   
     const {userUid} = route.params
-    console.log("userUid is now: ", userUid)
+    const currentUserUid = Firebase.auth().currentUser.uid
 
     const [userPosts, setUserPosts] = useState([])
     const [user, setUser] = useState(null)
+    const [following, setFollowing] = useState(false)
 
-    const currentUser = useSelector(state => state.user)
-    const myPosts = useSelector(state => state.myPosts)
+    const currentUser = useSelector(state => state.user.currentUser)
+    const myPosts = useSelector(state => state.user.posts)
+    const userFollowing = useSelector(state => state.user.following)
 
     const dispatch = useDispatch()
     const getMyPosts = () => dispatch(fetchMyPosts())
+    const getFollowing = () => dispatch(fetchUserFollowing())
+
+    console.log("am i following this guy? ", following)
 
     useEffect(() => {
-        if (userUid === Firebase.auth().currentUser.uid){
-            console.log("currentUser is: ", currentUser)
+        if (userUid === currentUserUid){
             setUser(currentUser)
         }else{
             Firebase.firestore()
@@ -40,14 +43,15 @@ const Profile = ({route}) => {
                     setUser(null)
                 }
             })
+
+            getFollowing()
         }
     }, [userUid])
 
     useEffect(() => {
-        if (userUid === Firebase.auth().currentUser.uid){
+        if (userUid === currentUserUid){
             getMyPosts()
         }else{
-            console.log("get another user's posts")
             Firebase.firestore()
             .collection("myPosts")
             .doc(userUid)
@@ -57,7 +61,6 @@ const Profile = ({route}) => {
             .then((snapshot) => {
                 if (snapshot.docs.length > 0){
                     let allPosts = snapshot.docs.map((doc) => doc.data())
-                    console.log("all this other user's posts: ", allPosts)
                     setUserPosts(allPosts)
                 }
                 else{
@@ -68,12 +71,45 @@ const Profile = ({route}) => {
     }, [user])
 
     useEffect(() => {
-        if (userUid === Firebase.auth().currentUser.uid && myPosts.count > 0){
-            console.log("myPosts is now: ", myPosts)
+        if (currentUserUid === userUid) {
+            console.log("same as logged in user")
+            return
+        }
+       
+        if (userFollowing.includes(userUid)) {
+            console.log("includes")
+            setFollowing(true)
+        }else{
+            console.log("not include")
+            setFollowing(false)
+        }
+    }, [userFollowing])
+
+    useEffect(() => {
+        
+        if (userUid === currentUserUid && myPosts.length > 0){
+            console.log("now setting userPosts to myPosts")
             setUserPosts(myPosts) 
-            console.log("userPosts is now: ", userPosts)
         }
     }, [myPosts])
+
+    const onFollow = () => {
+        Firebase.firestore()
+        .collection("following")
+        .doc(currentUserUid)
+        .collection("userFollowing")
+        .doc(userUid)
+        .set({})
+    }
+
+    const onUnfollow = () => {
+        Firebase.firestore()
+        .collection("following")
+        .doc(currentUserUid)
+        .collection("userFollowing")
+        .doc(userUid)
+        .delete()
+    }
 
     const viewComments = (post) => {
         // navigation.navigate("CommentList", {comments: post.comments})
@@ -95,6 +131,30 @@ const Profile = ({route}) => {
             <View style={styles.containerInfo}>
                 <Text>{user.username}</Text>
                 <Text>{user.email}</Text>
+
+                {
+                    userUid !== currentUserUid ?
+                    (
+                        <View>
+                            { following ? 
+                                (
+                                    <Button 
+                                        title="Unfollow"
+                                        onPress={() => onUnfollow()}
+                                    />
+                                )
+                                :
+                                (
+                                    <Button 
+                                        title="Follow"
+                                        onPress={() => onFollow()}
+                                    />
+                                )
+                            }
+                        </View>
+                    )
+                    : null
+                }
             </View>
             <View>
                 <FlatList 

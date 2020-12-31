@@ -76,7 +76,6 @@ const BottomTabs = () => {
                 listeners={({ navigation }) => ({
                   tabPress: event => {
                     event.preventDefault();
-                    console.log("tab pressed with UID: ", Firebase.auth().currentUser.uid )
                     navigation.navigate('Profile', {userUid: Firebase.auth().currentUser.uid });
                   },
                 })}
