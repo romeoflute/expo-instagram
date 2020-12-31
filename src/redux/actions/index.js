@@ -67,7 +67,7 @@ export function fetchMyTimeline(){
             }
             else{
                 console.log("with timeline snapshot.docs.length == 0")
-                dispatch({type: USER_TIMELINE_CHANGE, timelinePosts: []})
+                dispatch({type: USER_TIMELINE_STATE_CHANGE, timelinePosts: []})
             }
         })
     })

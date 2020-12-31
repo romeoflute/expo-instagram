@@ -4,7 +4,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import FeedTopTabs from './FeedTopTabs'
 import Explore from '../screens/Explore'
 import Notifications from '../screens/Notifications'
-import Profile from '../screens/Profile'
+import ProfileStacks from './ProfileStacks'
 
 import {MaterialCommunityIcons, MaterialIcons} from 'react-native-vector-icons'
 import Firebase from '../../config/FirebaseConfig';
@@ -71,12 +71,15 @@ const BottomTabs = () => {
                   }}
             />
             <BottomTab.Screen 
-                name="Profile" 
-                component={Profile} 
+                name="ProfileStacks" 
+                component={ProfileStacks} 
                 listeners={({ navigation }) => ({
                   tabPress: event => {
-                    event.preventDefault();
-                    navigation.navigate('Profile', {userUid: Firebase.auth().currentUser.uid });
+                    event.preventDefault()
+                    navigation.navigate('ProfileStacks', {
+                      screen: 'Profile',
+                      params: { userUid: Firebase.auth().currentUser.uid },
+                    });
                   },
                 })}
                 options={{

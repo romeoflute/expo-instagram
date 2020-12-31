@@ -64,17 +64,6 @@ const Feed = ({navigation}) => {
             </View>
         </View>
     )
-    // <PostList data={feed.data} viewComments = {viewComments} />   
-
-            {/* <Button
-            title="Logout"
-            onPress={() => {
-                Firebase.auth().signOut()
-            }}>
-        </Button>
-        
-        </View> */}
-        {/* <PostList data={feed.data} viewComments = {viewComments} />    */}
 }
 
 const styles = StyleSheet.create({

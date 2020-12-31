@@ -10,7 +10,7 @@ import {fetchMyPosts, fetchUserFollowing} from '../redux/actions/index'
 import {width} from '../utilities/constants'
 
 const Profile = ({route}) => {
-    const {userUid} = route.params
+    let {userUid} = route.params
     const currentUserUid = Firebase.auth().currentUser.uid
 
     const [userPosts, setUserPosts] = useState([])

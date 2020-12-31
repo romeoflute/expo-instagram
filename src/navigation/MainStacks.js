@@ -20,7 +20,7 @@ const MainStacks = () => {
 
   return(
 
-    <MainStack.Navigator initialRouteName="Bottom" >
+    <MainStack.Navigator initialRouteName="Bottom" screenOptions={{headerShown:false}} >
       <MainStack.Screen
         name="Bottom"
         component={BottomTab}
