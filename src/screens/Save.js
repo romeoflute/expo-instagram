@@ -67,6 +67,20 @@ const Save = ({route}) => {
         .then(() => {
             navigation.goBack("Add")
         })
+
+        Firebase.firestore()
+        .collection("timeline")
+        .doc(Firebase.auth().currentUser.uid)
+        .collection("timelinePosts")
+        .doc(postId)
+        .set({
+            mediaUrl: downloadURL,
+            caption,
+            date: dateTime
+        })
+        .then(() => {
+            console.log("saved also to timeline")
+        })
     }
 
     return (

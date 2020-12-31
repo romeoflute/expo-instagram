@@ -1,9 +1,15 @@
-import { USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE} from '../constants/index'
+import { 
+    USER_STATE_CHANGE, 
+    USER_POSTS_STATE_CHANGE,  
+    USER_FOLLOWING_STATE_CHANGE,
+    USER_TIMELINE_STATE_CHANGE
+} from '../constants/index'
 
 const initialState = {
     currentUser: null,
     posts: [],
-    following: []
+    following: [], 
+    timeline:[]
 }
 
 export function user(state = initialState, action) {
@@ -20,11 +26,18 @@ export function user(state = initialState, action) {
                 posts: action.myPosts
             }
         case USER_FOLLOWING_STATE_CHANGE:
-            console.log("USER_POSTS_STATE_CHANGE : ", action.following)
             return {
                 ...state,
                 following: action.following
             }
+        case USER_TIMELINE_STATE_CHANGE:
+            console.log("inside USER_TIMELINE_STATE_CHANGE ", action.timeline)
+
+            return {
+                ...state,
+                timeline: action.timeline
+            }
+        
         default:
             return state
     }

@@ -1,24 +1,27 @@
 import React, {useEffect} from 'react'
 // import {fetchFeed} from '../redux/actions'
 import PostList from '../components/PostList'
-import {View, Text, Button} from 'react-native'
+import {View, FlatList, Button, Text, Image, StyleSheet} from 'react-native'
 import Firebase from '../../config/FirebaseConfig'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchMyPosts} from '../redux/actions/index'
+import {fetchMyTimeline} from '../redux/actions/index'
+import {width} from '../utilities/constants'
 
 const Feed = ({navigation}) => {
 
     //get user from Redux
-    const user = useSelector(state => state.user)
-    const myPosts = useSelector(state => state.myPosts)
+    const user = useSelector(state => state.user.currentUser)
+    console.log("user in Feed: ", user)
+    const timeline = useSelector(state => state.user.timeline)
+    console.log("timeline now: ", timeline)
 
     const dispatch = useDispatch()
-    const getMyPosts = () => dispatch(fetchMyPosts())
+    const getMyTimeline = () => dispatch(fetchMyTimeline())
 
     useEffect(() => {
         if (user){
-            // getMyPosts()
+            getMyTimeline()
         }
     }, [user]);
 
@@ -28,17 +31,69 @@ const Feed = ({navigation}) => {
         // navigation.navigate("CommentList", {comments: post.comments})
     }
 
+    if (user == null){
+        return (
+            <View></View>
+        )
+    }
+
     return (
-        <View>
-            <Button
+        <View style={styles.container}>
+            <View style={styles.containerInfo}>
+                <Text>{user.username}</Text>
+                <Text>{user.email}</Text>
+            </View>
+            <View>
+                <FlatList 
+                    numColumns={3}
+                    horizontal={false}
+                    data={timeline}
+                    renderItem={({item}) => {
+                        return (
+                            <View style={styles.containerImage}>
+                                <Image 
+                                    style={styles.image}
+                                    source={{uri: item.mediaUrl}}
+                                />
+                            </View>
+                        )
+                    }}
+                    keyExtractor={item => item.postId} 
+                />
+            </View>
+        </View>
+    )
+    // <PostList data={feed.data} viewComments = {viewComments} />   
+
+            {/* <Button
             title="Logout"
             onPress={() => {
                 Firebase.auth().signOut()
             }}>
         </Button>
         
-        </View>
-        // <PostList data={feed.data} viewComments = {viewComments} />   
-    )
+        </View> */}
+        {/* <PostList data={feed.data} viewComments = {viewComments} />    */}
 }
+
+const styles = StyleSheet.create({
+    container:{
+        flex:1,
+    },
+    containerInfo:{
+        margin:20,
+    },
+    containerGallery:{
+        flex:1,
+    },
+    containerImage:{
+        flex: 1/3,
+    },
+    image:{
+        width: width/3,
+        height:width/3
+    }
+    
+})
+
 export default Feed
