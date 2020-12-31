@@ -1,4 +1,5 @@
 import { 
+    CLEAR_DATA,
     USERS_DATA_STATE_CHANGE, 
 } from '../constants/index'
 
@@ -14,16 +15,12 @@ export function users(state = initialState, action) {
                 ...state,
                 users: [...state.users, ...action.user]
             }
+        case CLEAR_DATA:
+            return initialState
         default:
             return state
     }
 }
 
-// const user = (state = initialState, action) => {
-//     return {
-//         ...state,
-//         currentUser: action.currentUser
-//     }
-// }
 
 

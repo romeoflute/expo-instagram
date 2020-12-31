@@ -5,7 +5,14 @@ import {
     USER_FOLLOWING_STATE_CHANGE, 
     USER_TIMELINE_STATE_CHANGE,
     USERS_DATA_STATE_CHANGE,
+    CLEAR_DATA
 } from '../constants'
+
+export function clearData(){
+    return ((dispatch) => {
+        dispatch({type:CLEAR_DATA})
+    })
+}
 
 export function fetchUser(){
     return ((dispatch) => {
@@ -116,6 +123,8 @@ export function fetchUsersData(uid){
         }
     })
 }
+
+
 
 // export function fetchUsersFollowingPosts(uid){
 //     return ((dispatch) => {

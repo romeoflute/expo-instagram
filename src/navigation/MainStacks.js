@@ -5,8 +5,8 @@ import Add from '../screens/Add'
 import BottomTab from './BottomTab'
 import Save from '../screens/Save'
 //redux
-import { useSelector, useDispatch } from 'react-redux'
-import {fetchUser} from '../redux/actions/index'
+import { useDispatch } from 'react-redux'
+import {clearData, fetchUser} from '../redux/actions/index'
 
 const MainStack = createStackNavigator();
 const MainStacks = () => {
@@ -15,6 +15,7 @@ const MainStacks = () => {
   const getCurrentUser = () => dispatch(fetchUser())
 
   useEffect(() => {
+      clearData()
       getCurrentUser()
   }, []);
 

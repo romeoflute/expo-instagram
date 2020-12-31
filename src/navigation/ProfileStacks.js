@@ -2,9 +2,9 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {TouchableOpacity, Text} from 'react-native'
 import Profile from '../screens/Profile'
-import {MaterialCommunityIcons, MaterialIcons} from 'react-native-vector-icons'
+import {MaterialCommunityIcons} from 'react-native-vector-icons'
 import Firebase from '../../config/FirebaseConfig'
-
+import {clearData} from '../redux/actions/index'
 
 const ProfileStacks = () => {
     const ProfileStack = createStackNavigator();
@@ -17,7 +17,9 @@ const ProfileStacks = () => {
             headerTitle: () => <Text style={{fontSize: 24}}>Profile</Text> ,
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
-                    Firebase.auth().signOut()
+                    Firebase.auth().signOut().then(() => {
+                        clearData()
+                    })
                 }}> 
                     <MaterialCommunityIcons 
                         name="logout" 
