@@ -12,7 +12,8 @@ const Login = ({navigation}) => {
 
     const onSignIn = () => {
         Firebase.auth().signInWithEmailAndPassword(email, password).then((result) => {
-        })
+            console.log("log in is successful ", result)
+        }) 
         .catch((error) => {
             console.log("login error: ", error)
         })

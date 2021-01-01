@@ -28,6 +28,9 @@ export function fetchUser(){
                 console.log('error: user does not exist')
             }
         })
+        .catch((error) => {
+            console.log("There was an error while fetching the user: ", error)
+        })
     })
 }
 
@@ -76,6 +79,9 @@ export function fetchMyTimeline(){
                 console.log("with timeline snapshot.docs.length == 0")
                 dispatch({type: USER_TIMELINE_STATE_CHANGE, timelinePosts: []})
             }
+        })
+        .catch((error) => {
+            console.log("error fetching timeline: ", error)
         })
     })
 }

@@ -2,10 +2,10 @@ import React from 'react'
 import {View, Text, Image, StyleSheet} from 'react-native'
 
 const Comment = ({oneComment}) => {
-    const {picture, username, comment} = oneComment
+    const {avatarUrl, username, comment} = oneComment
     return (
         <View style={styles.container} >
-            <Image style={styles.profilePic} source={{uri: picture}} />
+            <Image style={styles.profilePic} source={{uri: avatarUrl}} />
             <View style={styles.text}>
                 <Text style={styles.username}>{username}</Text>
                 <Text style={styles.comment}>{comment}</Text>

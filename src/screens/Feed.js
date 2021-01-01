@@ -1,9 +1,5 @@
 import React, {useEffect} from 'react'
-// import {fetchFeed} from '../redux/actions'
-import PostList from '../components/PostList'
 import {View, FlatList, Button, Text, Image, StyleSheet} from 'react-native'
-import Firebase from '../../config/FirebaseConfig'
-
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchMyTimeline} from '../redux/actions/index'
 import {width} from '../utilities/constants'
@@ -12,15 +8,16 @@ const Feed = ({navigation}) => {
 
     //get user from Redux
     const user = useSelector(state => state.user.currentUser)
-    console.log("user in Feed: ", user)
     const timeline = useSelector(state => state.user.timeline)
     console.log("timeline now: ", timeline)
+    console.log('user now : ', user)
 
     const dispatch = useDispatch()
     const getMyTimeline = () => dispatch(fetchMyTimeline())
 
     useEffect(() => {
         if (user){
+            console.log("will call getMyTimeline()")
             getMyTimeline()
         }
     }, [user]);
@@ -43,25 +40,37 @@ const Feed = ({navigation}) => {
                 <Text>{user.username}</Text>
                 <Text>{user.email}</Text>
             </View>
-            <View>
+            <View style={{flex:1}}>
                 <FlatList 
-                    numColumns={1}
-                    horizontal={false}
                     data={timeline}
                     renderItem={({item}) => {
                         return (
                             <View style={styles.containerImage}>
                                 <Text style={styles.username}>{item.username}</Text>
+                                <Text style={styles.caption}>{item.caption}</Text>
                                 <Image 
                                     style={styles.image}
                                     source={{uri: item.mediaUrl}}
                                 />
+                                
+                                <Text
+                                    onPress={() => {
+                                        navigation.navigate("CommentList", {postId: item.postId})
+                                    }}
+                                >
+                                    View Comments...
+                                </Text>
                             </View>
                         )
                     }}
                     keyExtractor={item => item.postId} 
+                    contentContainerStyle={{
+                        flexGrow: 1,
+                        alignItems:"center"
+                    }}
                 />
             </View>
+
         </View>
     )
 }
@@ -77,13 +86,15 @@ const styles = StyleSheet.create({
         flex:1,
     },
     containerImage:{
-        flex: 1/3,
     },
     image:{
         width: width,
         height:width
     },
     username:{
+
+    },
+    caption:{
 
     }
     
